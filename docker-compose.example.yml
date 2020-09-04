@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+    supervisor:
+      container_name: supervisor
+      image: redditsaved/laravel-supervisord:latest
+      restart: unless-stopped
+      environment:
+        - APP_ROOT=${APP_ROOT}
+        - QUEUE_DRIVER=${QUEUE_CONNECTION}
+        - OPTIONS=${QUEUE_OPTIONS}
+        - NUM_PROCS=${NUM_PROCS}
+      volumes:
+        - laravel_directory:${APP_ROOT}
+      network_mode: host
